@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>z-index</title>
+
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+        }
+
+        .apple {
+            background-color: red;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            /* z-index는 기본적으로 0이 디폴트 */
+            z-index: 3;
+        }
+
+        .banana {
+            background-color: yellow;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            z-index: 2;
+        }
+
+        .melon {
+            background-color: greenyellow;
+            position: absolute;
+            left: 300px;
+            top: 300px;
+            /*굳이 안부여해줘도 된다.*/
+            z-index: 1;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="apple">사과</div>
+    <div class="banana">바나나</div>
+    <div class="melon">멜론</div>
+
+</body>
+</html>

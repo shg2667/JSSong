@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display</title>
+    <style>
+        h3 {
+            background-color: yellow;
+            /* inline 은 width나 height, margin 등 */
+            /* 적용되지 않는 스타일들이 많아서 다루기 불편하다 */
+            display: inline-block;
+        }
+
+        img {
+            /* 화면의 한 줄을 다 차지한다. */
+            /* 실제로 차지하는 영역 외에는 마진으로 채워져 있다. */
+            /* inline인 태그에 대해 굳이 block으로 바꾸기 보다는 */
+            /* div 태그에 감싸주는 편이다 */
+            display: block;
+        }
+
+        #stamp{
+            /* 화면상에 존재하지 않도록 함(영역이 남지 않는다)*
+            /* display: none; */
+
+            /* 화면상에 보이지는 않지만 영역은 남아있다.
+            /* visiblailyt]
+            
+        }
+    </style>
+</head>
+<body>
+    <!-- 각 태그별로 display 기본 설정이 다름 -->
+    <!-- div, h, p 등은 한줄을 다 차지(display: block) -->
+    <!-- input, img, span 등은 본인의 영역만 차지(display: inline) -->
+    <h3>2023년 8월 2일</h3>
+    <h3>날씨: 폭염</h3>
+    <h2>연준이의 일기</h2>
+    <div>
+        <img src="https://economychosun.com/site/data/img_dir/2018/06/23/2018062300040_0.jpg" alt="">
+    </div>
+    <br>
+    <div>
+    오늘은 평양냉면을 먹었는데 맛이 없었다. 역시 냉면은 함흥냉면
+    </div>
+    <div>
+        <img src="https://www.sqler.com/files/attach/images/17828/672/415/06a3d0951ee10c99a48aaca441396809.png" alt="">
+    </div>
+</body>
+</html>
