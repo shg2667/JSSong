@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무기강화</title>
+
+    <style>
+        .container {
+            width: 900px;
+            height: 900px;
+            border: 1px solid black;
+            margin: auto;
+        }
+
+        .box {
+            width: 800px;
+            height: 700px;
+            border: 1px solid black;
+            margin-top: 50px;
+            margin-left: 50px;
+            background-color: darkgray;
+        }
+
+        .box > h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sword > img {
+            margin-left: 370px;
+            margin-top: 20px;
+            border: 3px solid brown;
+        }
+        
+        .increase {
+            margin-left: 25px;
+            width: 747px;
+            height: 130px;
+            border: 1px solid black;
+        }
+        
+        .increase2 {
+            margin-top: 20px;
+            margin-left: 25px;
+            width: 747px;
+            height: 130px;
+            border: 1px solid black;
+        }
+
+        .decrease {
+            margin-top: 100px;
+            margin-left: 25px;
+            width: 747px;
+            height: 130px;
+            border: 1px solid black;
+        }
+
+        .line {
+            width: 450px;
+            height: 35px;
+            position: absolute;
+            margin-left: 151px;
+            margin-top: 0px;
+            color: white;
+            background-color: blue
+        }
+
+        .increase > img {
+            margin: auto;
+            width: 149px;
+            height: 128px;
+            border: 1px solid black;
+        }
+
+        .increase2 > img {
+            margin: auto;
+            width: 149px;
+            height: 128px;
+            border: 1px solid black;
+        }
+
+        .decrease > img {
+            margin: auto;
+            width: 149px;
+            height: 128px;
+            border: 1px solid black;
+        }
+        
+
+
+        .jewel-line {
+            width: 450px;
+            height: 94px;
+            position: absolute;
+            margin-left: 151px;
+            margin-top: 35px;
+            background-color: gainsboro;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .jewel {
+            width: 15px;
+            height: 15px;
+            border: 2px solid rgb(43, 130, 165);
+            transform: rotate(45deg);
+            margin: auto;
+        }
+        
+        .increase > button {
+            width: 149px;
+            height: 130px;
+            margin-left: 450px;
+            position: absolute;
+            font-size: 25px;
+            background-color: blue;
+            color: white;
+        }
+
+        .increase2 > button {
+            width: 149px;
+            height: 130px;
+            margin-left: 450px;
+            position: absolute;
+            font-size: 25px;
+            background-color: blue;
+            color: white;
+        }
+
+        .decrease > button {
+            width: 149px;
+            height: 130px;
+            margin-left: 450px;
+            position: absolute;
+            font-size: 25px;
+            background-color: red;
+            color: white;
+        }
+
+        .d-line {
+            width: 450px;
+            height: 35px;
+            position: absolute;
+            margin-left: 151px;
+            margin-top: 0px;
+            color: white;
+            background-color: red;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h3>무기 세공</h3>
+            <div class="sword">
+                <img width="60" height="60" src="https://media.istockphoto.com/id/493221502/ko/%EB%B2%A1%ED%84%B0/%EC%A7%88%EB%A0%A4-swords-%EC%8B%A4%EB%A3%A8%EC%97%A3.jpg?s=612x612&w=0&k=20&c=LuLf7EoS-CRBMZHxs4Gkj4e2MfxnAOZdOhn_56UKwA8=" alt="">
+            </div>
+            
+            <div class="increase">
+                <div class="line">공격력 증가</div>
+                <div class="jewel-line"> 
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/128/6430/6430209.png" alt="">
+                <button>강화하기</button>
+            </div>
+
+            <div class="increase2">
+                <div class="line">치명타 확률 증가</div>
+                <div class="jewel-line"> 
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/128/9814/9814919.png" alt="">
+                <button>강화하기</button>
+            </div>
+            <div class="decrease">
+                <div class="d-line">공격력 감소</div>
+                <div class="jewel-line"> 
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                    <div class="jewel"></div>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/128/8135/8135125.png" alt="">
+                <button>강화하기</button>
+            </div>
+        </div>
+        <button>완료</button>
+        <button>초기화</button>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>

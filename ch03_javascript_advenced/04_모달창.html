@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모달창</title>
+    
+    <style>
+        .container {
+            width: 900px;
+            height: 600px;
+            border: 1px solid black;
+            margin: auto;
+
+            position: relative;
+        }
+
+        .modal1 {
+            width: 400px;
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: 4px 4px 4px 4px gainsboro;
+
+            position: absolute;
+            top: 10%;
+            left: 50%;
+
+            transform : translate(-50% , 0);
+        }
+
+        .modal2 {
+            width: 400px;
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: 4px 4px 4px 4px gainsboro;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform : translate(-50% , -50%);
+        }
+
+        .align-end{
+            text-align: end;
+        }
+
+        @keyframes down {
+            0%{
+                top: 0;
+                transform: translate(-50% , -100%);
+            }
+
+            100% {
+                top: 10%;
+                transform: translate(-50% , 0);
+            }
+        }
+
+        .modal-down {
+            animation: down 0.5s forwards;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        @keyframes show {
+            0% {
+                width: 0px;
+                height: 0px;
+            }
+
+            100% {
+                width: 400px;
+                height: 300px;
+            }
+        }
+        
+        .modal-show {
+            animation: show 0.5s forwards;
+        }
+
+        .s-none {
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div>
+            <button onclick="f_down()">내려오는 모달창</button>
+        </div>
+
+        <div>
+            <button onclick="f_show()">중앙에서 등장하는 모달창</button>
+        </div>
+
+
+
+        <div class="modal1 modal-down d-none">
+            <div class="align-end">
+                <img onclick="f_close1()" width="30" height="30" src="../resources/images/close.png" alt="">
+            </div>
+        </div>
+
+        <div class="modal2 modal-show s-none">
+            <div class="align-end">
+                <img onclick="f_close2()" width="30" height="30" src="../resources/images/close.png" alt="">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const v_modal1 = document.getElementsByClassName("modal1")[0];
+        const v_modal2 = document.getElementsByClassName("modal2")[0];
+
+        function f_down() {
+            v_modal1.classList.remove("d-none");
+        }
+
+        function f_close1() {
+            v_modal1.classList.add("d-none");
+        }
+
+        function f_show() {
+            v_modal2.classList.remove("s-none");
+        }
+
+        function f_close2() {
+            v_modal2.classList.add("s-none");
+        }
+    </script>
+
+</body>
+</html>

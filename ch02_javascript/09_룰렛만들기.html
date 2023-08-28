@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>룰렛</title>
+    <style>
+        .container {
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+            margin: auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container>div {
+            height: 80%;
+            position: relative;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+
+            border-top: 30px solid red;
+            border-bottom: 30px solid transparent;
+            border-left: 10px solid rgba(0, 0, 0, 0);
+            border-right: 10px solid #ffffff00;
+
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+
+            z-index: 5;
+        }
+
+        .btn {
+            width: 90px;
+            height: 90px;
+            border-radius: 45px;
+            background-color: red;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <img id="roulette" height="100%" src="../resources/images/룰렛 아이패드.png" alt="">
+            <div class="triangle"></div>
+            <div class="btn" onclick="f_start()">START</div>
+        </div>
+    </div>
+
+    <script>
+        const v_roulette = document.getElementById("roulette")
+
+        let v_deg = 0;
+        let v_isRun = false;
+
+        function f_start() {
+            if (v_isRun == false) {
+                // 멈출 랜덤 숫자 생성
+                let v_rand = Math.floor(Math.random() * 37) + 200;
+
+                console.log(v_rand)
+                f_rotate(v_rand);
+                v_isRun = true;
+            }
+        }
+
+        let v_speed = 20;
+        // f_rotate이 실행된 횟수
+        let v_count = 0;
+        function f_rotate(p_rand) {
+
+            v_count++;
+            // 룰렛이 돌아간 각도
+            v_deg += 14;
+            console.log(v_deg)
+            v_roulette.style.transform = "rotate(" + v_deg + "deg)";
+
+
+            if (v_count > 140) {
+                v_speed += 2;
+            }
+
+            // 멈추게하기
+            // 언제 멈출까?(랜덤)
+            console.log('rand: ' + p_rand);
+            console.log('count: ' + v_count);
+            if (v_count > p_rand) {
+
+                let degree = v_deg % 360;
+
+
+                // 멈춘 각도에 따른 상품 알림창 띄우기
+                let present;
+                if (degree < 30) {
+                    present = "아이패드";
+                } else if (degree < 90) {
+                    present = "10% 할인쿠폰";
+                } else if (degree < 150) {
+                    present = "미스터피자";
+                } else if (degree < 210) {
+                    present = "기프트카드";
+                } else if (degree < 270) {
+                    present = "갤럭시버즈";
+                } else if (degree < 330) {
+                    present = "아메리카노";
+                } else {
+                    present = "아이패드";
+                }
+
+                alert(present);
+
+                // 이후 다시 룰렛을 돌릴 수 있도록
+                // 원판의 위치 초기화
+                // 버튼 활성화를 위해 v_isRun 초기화
+                // 이번에 돌아간 총 각도 v_deg 초기화
+
+                v_roulette.style.transform = "rotate(0deg)";
+                v_isRun = false;
+                v_deg = 0;
+                v_count = 0;
+                v_speed = 20;
+
+                return;
+            }
+
+            setTimeout(f_rotate, v_speed, p_rand);
+        }
+    </script>
+</body>
+
+</html>

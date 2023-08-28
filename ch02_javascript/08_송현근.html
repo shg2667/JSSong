@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표준체중계산기</title>
+
+    <style>
+        .container{
+            width: 600px;
+            height: 500px;
+
+            border-radius: 30px;
+            box-shadow: 0px 0px 30px 0px purple;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50% , -50%);
+        }
+
+        .container > h1{
+            margin-bottom: 300px;
+            margin-right: 320px;
+        }
+
+        .container > div:nth-child(2){
+            position: absolute;
+            left: 10%;
+            top: 43%;
+            transform: translate(-50% , -50%);
+        }
+
+        .container > div:nth-child(3) {
+            position: absolute;
+            left: 62%;
+            top: 43%;
+            transform: translate(-50% , -50%);
+        }
+        
+        .tall{
+            width: 250px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            left: 25%;
+            top: 50%;
+            transform: translate(-50% , -50%);
+        }
+        
+        .tall > input {
+            width: 250px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 10px;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50% , -50%);
+        }
+        
+        .kg{
+            width: 250px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            left: 75%;
+            top: 50%;
+            transform: translate(-50% , -50%);
+        }
+
+        .kg > input {
+            width: 250px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 10px;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50% , -50%);
+        }
+
+        .input {
+            background-color: transparent;
+            border: 0;
+            
+            position: absolute;
+            left: 15%;
+            top: 65%;
+            transform: translate(-50% , -50%);
+        }
+
+        .execution {
+            width: 500px;
+            height: 60px;
+            position: absolute;
+
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: blueviolet;
+            color: white;
+            font-size: 18px;
+
+            left: 50%;
+            top: 85%;
+            transform: translate(-50% , -50%);
+
+            cursor: pointer;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="con">
+        <h1>표준 체중 계산기</h1>
+
+        <div>키(cm):</div>
+
+        <div>체중(kg):</div>
+
+        <div class="tall">
+            <input id="inputTall" type="text" value="">
+        </div>
+
+        <div class="kg">
+            <input id="inputKg" type="text" value="">
+        </div>
+        
+        <div class="input">
+            남성<input type="radio" name="gender" id="male">
+            여성<input type="radio" name="gender" id="female">
+        </div>
+
+        <div class="execution" onclick="f_click()">계산하기</div>
+    </div>
+
+
+    <script>
+        let v_container = document.getElementById("con")
+        let v_tall = document.getElementById("inputTall");
+        let v_kg = document.getElementById("inputKg");
+        let v_rdm = document.getElementById("male");
+        let v_rdf = document.getElementById("female");
+        let v_result = document.getElementById("result");
+
+        function f_click() {
+            let sw = 0;
+            if(v_rdm.checked == true) {
+                sw = v_tall.value/100 * v_tall.value/100 * 22; 
+            } else if(v_rdf.checked == true) {
+                sw = v_tall.value/100 * v_tall.value/100 * 21;
+            }
+        
+
+            let ssw = 0;
+            if(v_rdm.checked == true) {
+                ssw = v_kg.value / sw * 100;
+            } else if(v_rdf.checked == true) {
+                ssw = v_kg.value / sw * 100;
+            }
+
+            let sssw = "";
+            if (ssw < 90) {
+                sssw = "저체중";
+            } else if (ssw >= 90 && ssw < 110) {
+                sssw = "정상 체중";
+            } else if (ssw >= 110 && ssw < 120) {
+                sssw = "과체중";
+            } else if (ssw >= 120 && ssw < 130) {
+                sssw = "경도 비만";
+            } else if (ssw >= 130 && ssw < 160) {
+                sssw = "중정도 비만";
+            } else if (ssw >= 160 ) {
+                sssw = "고도비만";
+            }
+
+            v_container.innerHTML= "<h2>적합한 표준 체중은 " + Math.floor(sw,2) +" kg이며,<br><br><br><br> 현재 비만도는 " + sssw + " 입니다.</h2>"
+    }       
+            
+    </script>
+</body>
+</html>

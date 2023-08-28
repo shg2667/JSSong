@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>똥피하기</title>
+    <style>
+        body {
+            background-color: gainsboro;
+        }
+        .main {
+            width: 100%;
+            height: 950px;
+            margin: auto;
+            background-color: gainsboro;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #img{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div id="img">
+        <img id="playersImg" src="https://png.pngtree.com/png-vector/20221106/ourmid/pngtree-frog-cartoon-vector-png-image_6419602.png">
+        <img id="poopsImg" src="https://i2.ruliweb.com/img/18/04/16/162cedaa1c2d79c6.png">
+    </div>
+
+
+    <script>
+        // 상수설정
+        // Canvas는 그래픽을 그리고 조작하기 위한 도화지나 화면 역할, 웹 페이지 상에서 그림, 도형, 애니메이션 등을 생성하고 표시할 수 있는 도구
+        // context는 2D 그래픽을 다루는 `2d contex 사용.
+        const v_main = document.getElementsByClassName("main")[0];
+        const v_canvas = document.getElementById('canvas');
+        const v_context = v_canvas.getContext('2d');
+        // player및 poop의 이미지 가져오기
+        const v_playersImg = document.getElementById('playersImg');
+        const v_poopsImg = document.getElementById('poopsImg');
+
+        // canvas의 넓이와 높이를 main과 동일하게 설정
+        v_canvas.width = v_main.offsetWidth;
+        v_canvas.height = v_main.offsetHeight;
+
+        // 게임 변수 설정
+        let gameOver = false;
+        let score = 0;
+        let time = 0;
+        // 플레이어의 위치와 크기를 조정
+        let players = { x: v_canvas.width / 2, y: v_canvas.height - 50, radius: 20 };
+        let poops = [];
+        // 기본 속도를 나타내는 변수
+        let baseSpeed = 10;
+        // 속도가 점차 증가하는 양을 나타내는 변수
+        let speedIncrease = 0.002;
+        // 속도가 감소하는 양을 나타내는 변수
+        let speedDecrease = 0.005;
+
+        // ESC로 게임 재시작 및 종료 이벤트 리스너 등록
+        document.addEventListener('keydown', event => {
+            if (event.code === 'Escape') {
+                if (gameOver) {
+                    resetGame();
+                    gameStart();
+                } else {
+                    gameOver = true;
+                }
+            }
+        });
+
+        // 마우스로 피하기 모션 설정, 마우스의 x좌표로 설정
+        v_canvas.addEventListener('mousemove', event => {
+            if (!gameOver) {
+                players.x = event.clientX - v_canvas.offsetLeft;
+            }
+        });
+
+        // 게임 초기화 및 재시작
+        function resetGame() {
+            gameOver = false;
+            score = 0;
+            time = 0;
+            players = { x: v_canvas.width / 2, y: v_canvas.height - 100, radius: 20 };
+            poops = [];
+        }
+
+        // 게임 메인 함수 세부 설정
+        function gameStart() {
+            if (gameOver) {
+                return;
+            }
+
+            // poop 생성(속도 및 생성 위치 설정)
+            time++;
+            if (time % 4 == 0) {
+                poops.push({
+                    x: Math.random() * v_canvas.width,
+                    y: 0,
+                    radius: 10,
+                    speed: baseSpeed + time * speedIncrease
+                });
+            }
+
+            // poop가 점점 더 많이 생성되게, 속도 증가 설정(난이도Up)
+            poops = poops.filter(poop => {
+                poop.y += poop.speed;
+                poop.speed -= speedDecrease;
+                return poop.y <= v_canvas.height;
+            });
+
+            // poop과 player간의 충돌을 검사하고, score 증가
+            for (let poop of poops) {
+                // player와 poop사이의 거리 계산
+                // `Math.hypot` 함수는 두 점 간의 직선 거리(유클리드 거리)를 계산
+                let distance = Math.hypot(players.x - poop.x, players.y - poop.y);
+                // 충돌여부 확인 충돌이 발생하면 GameOver
+                if (distance < players.radius + poop.radius) {
+                    gameOver = true;
+                }
+            }
+            score++;
+
+            // context를 이용한 게임 화면 업데이트, canvas에 player, poop, score를 그리게함
+            // canvas 전체를 지우고 다시 그림으로써 게임화면을 업데이트(영역을 지우고 초기화)
+            v_context.clearRect(0, 0, v_canvas.width, v_canvas.height);
+            // player의 위치와 크기를 설정
+            v_context.drawImage(v_playersImg, players.x - players.radius, players.y - players.radius, players.radius * 2, players.radius * 2);
+            // poop의 위치와 크기를 설정
+            poops.forEach(poop => v_context.drawImage(v_poopsImg, poop.x - poop.radius, poop.y - poop.radius, poop.radius * 2, poop.radius * 2));
+
+            // 점수 정보설정 (글자의 색상과 폰트 지정 및 점수정보 그리기)
+            v_context.fillStyle = 'black';
+            v_context.font = '24px Arial';
+            v_context.fillText('Score: ' + score, 10, 30);
+
+            // 게임이 종료되었을 떄와 계속 진행중 일떄 동작을처리
+            if (!gameOver) {
+                // 게임이 종료되지 않았을때 실행, gameStart()가 계속해서 실행되면서 게임 진행
+                requestAnimationFrame(gameStart);
+            } else {
+                // 게임종료 화면 설정 및 다시하기 화면 설정
+                v_context.fillStyle = 'red';
+                v_context.font = 'bold 48px Arial';
+                v_context.fillText('똥에 맞아 죽었습니다.', v_canvas.width / 2 - 200, v_canvas.height / 2 - 50);
+                v_context.font = 'bold 24px Arial';
+                v_context.fillText('다시 피하려면 ESC를 누르세요.', v_canvas.width / 2 - 150, v_canvas.height / 2);
+            }
+        }
+
+        // player 및 poop 이미지 리소스를 로드한 후에 게임시작
+        v_playersImg.onload = () => {
+            v_poopsImg.onload = () => {
+                gameStart();
+            };
+        };
+
+        // gameStart() 호출
+        requestAnimationFrame(gameStart);
+    </script>
+</body>
+
+</html>

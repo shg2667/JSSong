@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐릭터목록</title>
+    <style>
+        .container {
+            width: 1000px;
+            height: 500px;
+            margin: auto;
+            background-color:black;
+            color: ivory;
+        }
+
+        .slot {
+            height: 80%;
+            display: flex;
+        }
+
+        .character {
+            width: calc(100%/3);
+            height: 100%;
+            border: 1px solid white;
+        }
+
+        .menu {
+            height: 20%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            font-size: 20px;
+            background-color: rgb(10, 76, 99);
+            color: white;
+        }
+
+        .character>img {
+            height: 60%;
+            width: 99%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="slot">
+            <div class="character"></div>
+            <div class="character"></div>
+            <div class="character"></div>
+        </div>
+
+        <div class="menu">
+            <button onclick="f_new()">캐릭터 생성</button>
+        </div>
+
+    </div>
+
+    <script>
+        let v_array = JSON.parse(localStorage.getItem("character"));
+
+        if(v_array == null) {
+            let v_temp = [];
+            localStorage.setItem("character" , JSON.stringify(v_temp));
+            v_array = localStorage.getItem("character");
+        }
+
+        function f_new() {
+            if (v_array.length == 3) {
+                alert("더 이상 캐릭터 생성이 불가능합니다.");
+                return;
+            }
+            location.href = "./02_캐릭터생성.html";
+        }
+
+        const v_character = document.getElementsByClassName("character")
+
+        function f_draw() {
+            let v_array = JSON.parse(localStorage.getItem("character"));
+            console.log(v_array);
+
+            for (let i = 0; i < v_array.length; i++) {
+                v_array[i]["src"]
+                v_array[i]["name"]
+
+                let v_img = document.createElement("img");
+                v_img.src = v_array[i]["src"];
+
+                v_character[i].appendChild(v_img);
+
+                let v_h = "<h2>" + v_array[i]["name"] + "</h2>"
+                v_character[i].innerHTML += v_h;
+
+                let v_btn = document.createElement("button");
+                v_btn.innerHTML = "삭제";
+                v_btn.onclick = () => {
+                    console.log(i);
+                    v_array.splice(i, 1);
+                    localStorage.setItem("character", JSON.stringify(v_array));
+                    // 페이지 새로고침
+                    // 사용자에게 불쾌감을 줄 수 있음 (UX)
+                    location.reload();
+                }
+                v_character[i].appendChild(v_btn);
+            }
+        }
+        f_draw();
+
+
+    </script>
+</body>
+
+</html>

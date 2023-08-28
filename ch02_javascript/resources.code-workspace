@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "resources",
+			"path": "../resources"
+		},
+		{
+			"name": "ch01_html_css",
+			"path": "../ch01_html_css"
+		},
+		{
+			"name": "ch02_javascript",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "ch02_javascript"
+	}
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단 테이블</title>
+</head>
+<body>
+    <table border="1">
+    <script>
+        document.write('<table border="1">');
+            for(let i = 2; i<= 9; i++){
+                document.write('<tr>');
+                    for(let j = 1; j < 10; j++){
+                        document.write('<td>' + k + 'x' + i + ' = ' + (i*k) + '</td>')
+                    }
+                    document.write('</tr');
+            }
+            document.write('<table>');
+    </script>
+    </table>
+    </body>
+</html>
